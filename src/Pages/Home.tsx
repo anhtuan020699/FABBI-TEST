@@ -85,7 +85,7 @@ const Home = () => {
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
-              Backk
+              Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleNext} sx={{ mr: 1 }}>
