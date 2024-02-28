@@ -55,7 +55,7 @@ const Home = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStep = (step: number) => () => {
+  const handleNextStep = (step: number) => () => {
     setActiveStep(step);
   };
 
@@ -64,7 +64,7 @@ const Home = () => {
       <Stepper nonLinear activeStep={activeStep} sx={{ mt: 2 }}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
+            <StepButton color="inherit" onClick={handleNextStep(index)}>
               {label}
             </StepButton>
           </Step>
@@ -85,7 +85,7 @@ const Home = () => {
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
-              Back
+              Backk
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleNext} sx={{ mr: 1 }}>
