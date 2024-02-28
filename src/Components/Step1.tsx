@@ -33,17 +33,23 @@ const Step1 = () => {
 
   return (
     <div>
-      <CustomSelect
-        value={meal}
-        options={mealList}
-        handleChange={handleChange}
-        // multiple
-      />
+      <div>
+        <div>Please select a meal</div>
+        <CustomSelect
+          value={meal}
+          options={mealList}
+          handleChange={handleChange}
+          // multiple
+        />
+      </div>
 
-      <CustomNumberInput
-        value={numberPeople}
-        handleChange={handleChangePeople}
-      />
+      <div>
+        <div>Please enter number of people</div>
+        <CustomNumberInput
+          value={numberPeople}
+          handleChange={handleChangePeople}
+        />
+      </div>
     </div>
   );
 };

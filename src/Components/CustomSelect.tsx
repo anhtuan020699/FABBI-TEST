@@ -17,7 +17,6 @@ const CustomSelect: React.FC<CustomMultiSelectProps> = ({
   return (
     <Box>
       <FormControl fullWidth>
-        <InputLabel id="multi-select-label">Select options</InputLabel>
         <Select
           labelId="multi-select-label"
           id="multi-select"

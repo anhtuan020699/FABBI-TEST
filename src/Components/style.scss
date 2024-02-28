@@ -1,0 +1,19 @@
+.card {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.lable {
+  font-weight: 600;
+}

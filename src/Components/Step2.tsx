@@ -1,5 +1,4 @@
 import { SelectChangeEvent } from "@mui/material";
-import React from "react";
 import { useHomeContext } from "../Pages/HomeContext";
 import CustomSelect from "./CustomSelect";
 
@@ -13,12 +12,12 @@ const Step2 = () => {
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const selectedValues = event.target.value as string[];
-    console.log(selectedValues);
     setRestaurants(selectedValues);
   };
 
   return (
     <div>
+      <div>Please select a restaurant</div>
       <CustomSelect
         value={restaurants}
         options={options}

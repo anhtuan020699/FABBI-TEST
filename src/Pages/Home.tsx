@@ -10,6 +10,7 @@ import Step1 from "../Components/Step1";
 import Preview from "../Components/Preview";
 import Step2 from "../Components/Step2";
 import FoodSelection from "../Components/FoodSelection";
+import CustomToast from "../Components/CustomToast";
 
 const steps = [
   "Meal Selection",
@@ -24,31 +25,54 @@ export enum StepType {
   Privew = 4,
 }
 const Home = () => {
-  const { meal, numberPeople, restaurants } = useHomeContext();
+  const { meal, numberPeople, restaurants, dataStep3 } = useHomeContext();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
   }>({});
+  const totalDishes = React.useMemo(() => {
+    if (!dataStep3) return 0;
+
+    return dataStep3.reduce((acc: any, item: any) => {
+      return acc + item.total;
+    }, 0);
+  }, [dataStep3]);
 
   const totalSteps = () => {
     return steps.length;
   };
-
   const isLastStep = () => {
     return activeStep === totalSteps() - 1;
+  };
+  const [openToast, setOpenToast] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const handleOpenToast = (message: string) => {
+    setOpenToast(true);
+    setMessage(message);
+  };
+
+  const handleCloseToast = () => {
+    setOpenToast(false);
   };
 
   const handleNext = () => {
     if (activeStep + 1 === StepType.Step1 && (!meal || !numberPeople)) {
-      return;
+      return handleOpenToast("Please enter all required information!");
     }
     if (activeStep + 1 === StepType.Step2 && !restaurants) {
-      return;
+      return handleOpenToast("Please enter all required information!");
     }
-    const newActiveStep = isLastStep()
-      ? steps.findIndex((step, i) => !(i in completed))
-      : activeStep + 1;
-    setActiveStep(newActiveStep);
+    if (activeStep + 1 === StepType.Step3 && totalDishes < numberPeople) {
+      return handleOpenToast(
+        "The total dishes must be greater than or equal to the number of people!"
+      );
+    }
+    const newActiveStep = activeStep + 1;
+    if (newActiveStep != StepType.Privew) {
+      setActiveStep(newActiveStep);
+    } else {
+      setActiveStep(3);
+    }
   };
 
   const handleBack = () => {
@@ -89,11 +113,19 @@ const Home = () => {
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleNext} sx={{ mr: 1 }}>
-              Next
+              {activeStep + 1 === StepType.Privew ? "Submit" : "Next"}
             </Button>
           </Box>
         </React.Fragment>
       </div>
+
+      <CustomToast
+        open={openToast}
+        onClose={handleCloseToast}
+        message={message}
+        severity="error"
+        duration={3000}
+      />
     </Box>
   );
 };

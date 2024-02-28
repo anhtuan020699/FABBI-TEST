@@ -12,7 +12,7 @@ const CustomNumberInput: React.FC<CustomNumberInputProps> = ({
 }) => {
   return (
     <TextField
-      label="Nhập số"
+      label=""
       variant="outlined"
       type="number"
       value={value}
@@ -23,6 +23,7 @@ const CustomNumberInput: React.FC<CustomNumberInputProps> = ({
           step: 1,
           max: 10,
         },
+        style: { width: "100px", height: "40px" },
       }}
     />
   );
